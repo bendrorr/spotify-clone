@@ -17,8 +17,9 @@ export class TracksService {
 
     }
 
-    async findAll(): Promise<Track[]> {
-        return this.trackModel.find().exec();
+    async findAll(): Promise<TrackDto[]> {
+        const tracks = await this.trackModel.find().exec();
+        return tracks.map(TrackMapper.toDto);
     }
 
     async findById(id: string): Promise<TrackDto> {
